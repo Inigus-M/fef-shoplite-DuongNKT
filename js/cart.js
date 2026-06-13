@@ -1,5 +1,9 @@
 const cartContent = document.getElementById("cart-content");
 
+function getCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
 function renderCart() {
   let cart = getCart();
 
@@ -132,28 +136,10 @@ function renderCart() {
     </table>
 
     </div>
-
-    <div class="text-end">
-
-        <h3>
-            Total:
-            $${total.toFixed(2)}
-        </h3>
-
-        <button
-            id="clear-cart"
-            class="btn btn-danger mt-2"
-        >
-            Clear Cart
-        </button>
-
-    </div>
-    
     `;
 
   attachEvents();
 }
-
 function attachEvents() {
   document.querySelectorAll(".increase").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -198,14 +184,6 @@ function removeItem(id) {
   const cart = getCart().filter((p) => p.id !== id);
 
   saveCart(cart);
-
-  renderCart();
-
-  updateCartCount();
-}
-
-function clearCart() {
-  localStorage.removeItem("cart");
 
   renderCart();
 
