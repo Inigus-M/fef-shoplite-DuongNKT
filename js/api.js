@@ -1,7 +1,7 @@
 const BASE_URL = "https://dummyjson.com/products";
 
 async function getProducts() {
-  const response = await fetch(`${BASE_URL}?limit=7`);
+  const response = await fetch(`${BASE_URL}?limit=200`);
   if (!response.ok) {
     throw new Error("Failed to fetch products");
   }

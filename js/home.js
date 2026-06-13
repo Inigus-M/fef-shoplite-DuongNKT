@@ -3,7 +3,7 @@ const pagination = document.getElementById("pagination");
 
 let allProducts = [];
 let currentPage = 1;
-const productsPerPage = 20;
+const productsPerPage = 16;
 
 function renderProducts(products) {
   productList.innerHTML = products
