@@ -9,7 +9,14 @@ async function getProducts() {
   return await response.json();
 }
 
-async function getProductById(id) {}
+async function getProductById(id) {
+  const response = await fetch(`${BASE_URL}/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Product not found");
+  }
+  return await response.json();
+}
 
 async function getCategories() {}
 

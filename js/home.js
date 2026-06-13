@@ -35,12 +35,6 @@ function renderProducts(products) {
                         ${product.title}
                     </h5>
 
-                    <p
-                        class="text-warning"
-                    >
-                        ★ ${product.rating}
-                    </p>
-
                     <h4
                         class="text-success"
                     >
