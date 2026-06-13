@@ -1,5 +1,6 @@
 const productList = document.getElementById("product-list");
 const pagination = document.getElementById("pagination");
+const productCategory = document.getElementById("category-list");
 
 let allProducts = [];
 let currentPage = 1;
