@@ -63,8 +63,8 @@ _(Đánh dấu `[x]` vào các tính năng bạn đã hoàn thiện)_
 
 ### 🟡 Mức Khá (Good Tier)
 
-- [ ] Giỏ hàng hoạt động đầy đủ (thêm, xóa, cập nhật số lượng, tính tổng) và lưu trữ xuyên trang bằng `localStorage`.
-- [ ] Tính năng tìm kiếm/lọc sản phẩm theo danh mục và cập nhật giao diện lưới tức thì.
+- [x] Giỏ hàng hoạt động đầy đủ (thêm, xóa, cập nhật số lượng, tính tổng) và lưu trữ xuyên trang bằng `localStorage`.
+- [x] Tính năng tìm kiếm/lọc sản phẩm theo danh mục và cập nhật giao diện lưới tức thì.
 - [ ] Có trạng thái hiển thị rõ ràng khi đang tải API (Loading) và khi gặp lỗi (Error).
 - [ ] Bố cục giao diện bằng Flexbox/Grid hiển thị mượt mà trên cả 3 kích thước màn hình.
 

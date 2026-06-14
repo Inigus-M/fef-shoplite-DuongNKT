@@ -1,12 +1,27 @@
 const productList = document.getElementById("product-list");
 const pagination = document.getElementById("pagination");
-const productCategory = document.getElementById("category-list");
+const searchInput = document.getElementById("search-input");
+const categoryFilter = document.getElementById("category-filter");
+const sortSelect = document.getElementById("sort-select");
 
 let allProducts = [];
+let filteredProducts = [];
 let currentPage = 1;
 const productsPerPage = 16;
 
 function renderProducts(products) {
+  if (products.length === 0) {
+    productList.innerHTML = `
+      <div class="col-12">
+        <div class="alert alert-warning text-center mb-0">
+          No products found.
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
   productList.innerHTML = products
     .map(
       (product) => `
@@ -88,13 +103,17 @@ function getCurrentPageProducts() {
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
 
-  return allProducts.slice(startIndex, endIndex);
+  return filteredProducts.slice(startIndex, endIndex);
 }
 
 function renderPagination() {
-  const totalPages = Math.ceil(allProducts.length / productsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   pagination.innerHTML = "";
+
+  if (totalPages <= 1) {
+    return;
+  }
 
   for (let page = 1; page <= totalPages; page++) {
     pagination.innerHTML += `
@@ -112,12 +131,64 @@ function renderCurrentPage() {
   renderPagination();
 }
 
+function renderCategoryOptions() {
+  const categories = [...new Set(allProducts.map((product) => product.category))];
+
+  categoryFilter.innerHTML = `
+    <option value="all">All Categories</option>
+    ${categories
+      .map((category) => {
+        return `<option value="${category}">${category}</option>`;
+      })
+      .join("")}
+  `;
+}
+
+function getSortedProducts(products) {
+  const sortedProducts = [...products];
+
+  if (sortSelect.value === "price-asc") {
+    sortedProducts.sort((a, b) => a.price - b.price);
+  } else if (sortSelect.value === "price-desc") {
+    sortedProducts.sort((a, b) => b.price - a.price);
+  } else if (sortSelect.value === "title") {
+    sortedProducts.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  return sortedProducts;
+}
+
+function applyFilters() {
+  const searchText = searchInput.value.trim().toLowerCase();
+  const selectedCategory = categoryFilter.value;
+
+  filteredProducts = allProducts.filter((product) => {
+    const matchesSearch =
+      product.title.toLowerCase().includes(searchText) ||
+      product.description.toLowerCase().includes(searchText);
+    const matchesCategory =
+      selectedCategory === "all" || product.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  filteredProducts = getSortedProducts(filteredProducts);
+  currentPage = 1;
+  renderCurrentPage();
+}
+
 async function loadProducts() {
   const data = await getProducts();
 
   allProducts = data.products;
+  filteredProducts = allProducts;
+  renderCategoryOptions();
   renderCurrentPage();
 }
+
+searchInput.addEventListener("input", applyFilters);
+categoryFilter.addEventListener("change", applyFilters);
+sortSelect.addEventListener("change", applyFilters);
 
 pagination.addEventListener("click", (event) => {
   const pageButton = event.target.closest(".page-link");
