@@ -53,7 +53,7 @@ function renderProducts(products) {
                         </a>
 
                         <button
-                            class="btn btn-primary"
+                            class="btn btn-primary add-cart-btn"
                             data-id="${product.id}"
                         >
                             Add To Cart
@@ -82,6 +82,43 @@ function attachAddToCartEvents() {
       addToCart(product);
     });
   });
+}
+
+function addToCart(product) {
+  if (!product) {
+    return;
+  }
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existingProduct = cart.find((item) => item.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity++;
+  } else {
+    cart.push({
+      ...product,
+      quantity: 1,
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  alert("Added to cart!");
+}
+
+function updateCartCount() {
+  const cartCount = document.getElementById("cart-count");
+
+  if (!cartCount) {
+    return;
+  }
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
+
+  cartCount.textContent = totalItems;
 }
 
 function getCurrentPageProducts() {
@@ -131,3 +168,4 @@ pagination.addEventListener("click", (event) => {
 });
 
 loadProducts();
+updateCartCount();
