@@ -4,8 +4,28 @@ function getCart() {
   return JSON.parse(localStorage.getItem("cart")) || [];
 }
 
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function updateCartCount() {
+  const cartCount = document.getElementById("cart-count");
+
+  if (!cartCount) {
+    return;
+  }
+
+  const totalItems = getCart().reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
+
+  cartCount.textContent = totalItems;
+}
+
 function renderCart() {
   let cart = getCart();
+
+  updateCartCount();
 
   if (cart.length === 0) {
     cartContent.innerHTML = `
@@ -155,35 +175,16 @@ function renderCart() {
     
     `;
 
-  attachEvents();
-}
-
-function attachEvents() {
-  document.querySelectorAll(".increase").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      updateQuantity(Number(btn.dataset.id), 1);
-    });
-  });
-
-  document.querySelectorAll(".decrease").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      updateQuantity(Number(btn.dataset.id), -1);
-    });
-  });
-
-  document.querySelectorAll(".remove").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      removeItem(Number(btn.dataset.id));
-    });
-  });
-
-  document.getElementById("clear-cart")?.addEventListener("click", clearCart);
 }
 
 function updateQuantity(id, amount) {
   let cart = getCart();
 
   const item = cart.find((p) => p.id === id);
+
+  if (!item) {
+    return;
+  }
 
   item.quantity += amount;
 
@@ -216,5 +217,24 @@ function clearCart() {
   updateCartCount();
 }
 
+cartContent.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+
+  if (!button) {
+    return;
+  }
+
+  const id = Number(button.dataset.id);
+
+  if (button.classList.contains("increase")) {
+    updateQuantity(id, 1);
+  } else if (button.classList.contains("decrease")) {
+    updateQuantity(id, -1);
+  } else if (button.classList.contains("remove")) {
+    removeItem(id);
+  } else if (button.id === "clear-cart") {
+    clearCart();
+  }
+});
+
 renderCart();
-const cartContainer = document.getElementById("cart-container");

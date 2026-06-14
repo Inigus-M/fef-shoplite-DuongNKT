@@ -54,6 +54,7 @@ function renderProducts(products) {
 
                         <button
                             class="btn btn-primary"
+                            data-id="${product.id}"
                         >
                             Add To Cart
                         </button>
@@ -68,6 +69,19 @@ function renderProducts(products) {
     `,
     )
     .join("");
+  attachAddToCartEvents();
+}
+
+function attachAddToCartEvents() {
+  document.querySelectorAll(".add-cart-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const productId = Number(button.dataset.id);
+
+      const product = allProducts.find((p) => p.id === productId);
+
+      addToCart(product);
+    });
+  });
 }
 
 function getCurrentPageProducts() {

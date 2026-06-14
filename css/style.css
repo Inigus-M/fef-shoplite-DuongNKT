@@ -2,3 +2,22 @@
   height: 220px;
   object-fit: contain;
 }
+
+html,
+body {
+  height: 100%; /* Bắt buộc phải có để body biết chiều cao màn hình là bao nhiêu */
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Xếp các thành phần header, main, footer theo chiều dọc */
+}
+
+main {
+  flex: 1 0 auto; /* Ý nghĩa: Hãy co giãn và chiếm nốt TOÀN BỘ khoảng trống còn lại của màn hình */
+}
+
+footer {
+  flex-shrink: 0; /* Đảm bảo footer không bao giờ bị bóp méo hay co nhỏ lại */
+}
