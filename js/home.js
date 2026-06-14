@@ -9,6 +9,33 @@ let filteredProducts = [];
 let currentPage = 1;
 const productsPerPage = 16;
 
+function renderLoading() {
+  productList.innerHTML = `
+    <div class="col-12">
+      <div class="d-flex justify-content-center align-items-center py-5">
+        <div class="spinner-border text-primary me-3" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <span class="fs-5">Loading products...</span>
+      </div>
+    </div>
+  `;
+
+  pagination.innerHTML = "";
+}
+
+function renderError(message) {
+  productList.innerHTML = `
+    <div class="col-12">
+      <div class="alert alert-danger text-center mb-0">
+        ${message}
+      </div>
+    </div>
+  `;
+
+  pagination.innerHTML = "";
+}
+
 function renderProducts(products) {
   if (products.length === 0) {
     productList.innerHTML = `
@@ -25,7 +52,7 @@ function renderProducts(products) {
   productList.innerHTML = products
     .map(
       (product) => `
-    <div class="col-md-6 col-lg-3">
+    <div class="product-grid-item">
 
             <div class="card h-100 shadow-sm border-0">
 
@@ -178,12 +205,18 @@ function applyFilters() {
 }
 
 async function loadProducts() {
-  const data = await getProducts();
+  renderLoading();
 
-  allProducts = data.products;
-  filteredProducts = allProducts;
-  renderCategoryOptions();
-  renderCurrentPage();
+  try {
+    const data = await getProducts();
+
+    allProducts = data.products;
+    filteredProducts = allProducts;
+    renderCategoryOptions();
+    renderCurrentPage();
+  } catch (error) {
+    renderError("Unable to load products. Please try again later.");
+  }
 }
 
 searchInput.addEventListener("input", applyFilters);

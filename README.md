@@ -65,14 +65,14 @@ _(Đánh dấu `[x]` vào các tính năng bạn đã hoàn thiện)_
 
 - [x] Giỏ hàng hoạt động đầy đủ (thêm, xóa, cập nhật số lượng, tính tổng) và lưu trữ xuyên trang bằng `localStorage`.
 - [x] Tính năng tìm kiếm/lọc sản phẩm theo danh mục và cập nhật giao diện lưới tức thì.
-- [ ] Có trạng thái hiển thị rõ ràng khi đang tải API (Loading) và khi gặp lỗi (Error).
+- [x] Có trạng thái hiển thị rõ ràng khi đang tải API (Loading) và khi gặp lỗi (Error).
 - [ ] Bố cục giao diện bằng Flexbox/Grid hiển thị mượt mà trên cả 3 kích thước màn hình.
 
 ### 🔴 Mức Giỏi (Excellent Tier)
 
 - [ ] Áp dụng kỹ thuật Event Delegation cho danh sách lưới sản phẩm hoặc giỏ hàng.
-- [ ] Tính năng sắp xếp (Sort theo giá, tên) kết hợp đồng thời cùng bộ lọc.
-- [ ] Có huy hiệu (badge) đếm số lượng giỏ hàng trên Navbar tự động đồng bộ.
-- [ ] Tính năng phân trang (Pagination) hoặc Tải thêm (Load more) danh sách sản phẩm.
+- [x] Tính năng sắp xếp (Sort theo giá, tên) kết hợp đồng thời cùng bộ lọc.
+- [x] Có huy hiệu (badge) đếm số lượng giỏ hàng trên Navbar tự động đồng bộ.
+- [x] Tính năng phân trang (Pagination)
 - [ ] Nâng cao trải nghiệm UX: khung tải skeleton, toast notification báo thành công, kỹ thuật debounce cho ô tìm kiếm.
 - [ ] Cấu trúc code sạch sẽ (tách hàm/modules rõ ràng, đặt tên chuẩn, không có lỗi đỏ trên Console).

@@ -81,7 +81,7 @@ function renderCart() {
                 <td>
 
                     <div
-                    class="d-flex gap-2"
+                    class="cart-quantity-controls"
                     >
 
                     <button
