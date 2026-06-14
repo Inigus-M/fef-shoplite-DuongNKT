@@ -56,68 +56,74 @@
     </header>
     <main class="container py-5">
       <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-          <div class="card shadow-sm">
+        <div class="col-lg-6">
+          <div class="card shadow">
             <div class="card-body">
-              <h2 class="mb-4">Register</h2>
+              <h2 class="mb-4 text-center">Register Form</h2>
 
               <form id="register-form">
+                <!-- Full Name -->
                 <div class="mb-3">
                   <label class="form-label"> Full Name </label>
 
-                  <input type="text" id="fullName" class="form-control" />
+                  <input type="text" id="full-name" class="form-control" />
 
-                  <small id="fullNameError" class="text-danger"></small>
+                  <small id="name-error" class="text-danger"></small>
                 </div>
 
+                <!-- Email -->
                 <div class="mb-3">
                   <label class="form-label"> Email </label>
 
-                  <input type="email" id="email" class="form-control" />
+                  <input type="text" id="email" class="form-control" />
 
-                  <small id="emailError" class="text-danger"></small>
+                  <small id="email-error" class="text-danger"></small>
                 </div>
 
+                <!-- Password -->
                 <div class="mb-3">
                   <label class="form-label"> Password </label>
 
                   <input type="password" id="password" class="form-control" />
 
-                  <small id="passwordError" class="text-danger"></small>
+                  <small id="password-error" class="text-danger"></small>
                 </div>
 
+                <!-- Phone -->
                 <div class="mb-3">
                   <label class="form-label"> Phone Number </label>
 
                   <input type="text" id="phone" class="form-control" />
 
-                  <small id="phoneError" class="text-danger"></small>
+                  <small id="phone-error" class="text-danger"></small>
                 </div>
 
+                <!-- Select -->
                 <div class="mb-3">
                   <label class="form-label"> Country </label>
 
                   <select id="country" class="form-select">
                     <option value="">Select Country</option>
 
-                    <option>Vietnam</option>
+                    <option value="Vietnam">Vietnam</option>
 
-                    <option>Japan</option>
+                    <option value="Japan">Japan</option>
 
-                    <option>USA</option>
+                    <option value="USA">USA</option>
                   </select>
 
-                  <small id="countryError" class="text-danger"></small>
+                  <small id="country-error" class="text-danger"></small>
                 </div>
 
+                <!-- Checkbox -->
                 <div class="form-check mb-3">
                   <input class="form-check-input" type="checkbox" id="agree" />
 
-                  <label class="form-check-label"> Agree to Terms </label>
+                  <label class="form-check-label"> I agree to the terms </label>
 
                   <br />
 
-                  <small id="agreeError" class="text-danger"></small>
+                  <small id="agree-error" class="text-danger"></small>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">
@@ -125,14 +131,16 @@
                 </button>
               </form>
 
-              <div id="successMessage" class="alert alert-success mt-3 d-none">
-                Registration Successful!
+              <div id="success-message" class="alert alert-success mt-3 d-none">
+                Registration successful!
               </div>
             </div>
           </div>
         </div>
       </div>
     </main>
+
+    <script src="js/register.js"></script>
 
     <footer class="bg-dark text-light text-center py-4 mt-5">
       <p class="mb-0">© 2026 ShopLite</p>
