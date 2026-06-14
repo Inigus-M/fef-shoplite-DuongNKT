@@ -1,5 +1,6 @@
 const form = document.getElementById("register-form");
 const successMessage = document.getElementById("success-message");
+const submitButton = document.getElementById("submit-btn");
 
 const fields = {
   fullName: {
@@ -102,6 +103,16 @@ function validateForm() {
   return results.every((isValid) => isValid);
 }
 
+function isFormValid() {
+  return Object.values(fields).every((field) => {
+    return field.validate(getFieldValue(field)) === "";
+  });
+}
+
+function updateSubmitButton() {
+  submitButton.disabled = !isFormValid();
+}
+
 function hideSuccessMessage() {
   successMessage.classList.add("d-none");
 }
@@ -112,6 +123,7 @@ Object.values(fields).forEach((field) => {
   field.input.addEventListener(eventName, () => {
     hideSuccessMessage();
     validateField(field);
+    updateSubmitButton();
   });
 });
 
@@ -132,4 +144,8 @@ form.addEventListener("submit", (event) => {
     field.input.classList.remove("is-valid", "is-invalid");
     field.error.textContent = "";
   });
+
+  updateSubmitButton();
 });
+
+updateSubmitButton();
