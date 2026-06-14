@@ -84,43 +84,6 @@ function attachAddToCartEvents() {
   });
 }
 
-function addToCart(product) {
-  if (!product) {
-    return;
-  }
-
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const existingProduct = cart.find((item) => item.id === product.id);
-
-  if (existingProduct) {
-    existingProduct.quantity++;
-  } else {
-    cart.push({
-      ...product,
-      quantity: 1,
-    });
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-  alert("Added to cart!");
-}
-
-function updateCartCount() {
-  const cartCount = document.getElementById("cart-count");
-
-  if (!cartCount) {
-    return;
-  }
-
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalItems = cart.reduce((total, item) => {
-    return total + item.quantity;
-  }, 0);
-
-  cartCount.textContent = totalItems;
-}
-
 function getCurrentPageProducts() {
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;

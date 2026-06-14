@@ -1,27 +1,5 @@
 const cartContent = document.getElementById("cart-content");
 
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
-}
-
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function updateCartCount() {
-  const cartCount = document.getElementById("cart-count");
-
-  if (!cartCount) {
-    return;
-  }
-
-  const totalItems = getCart().reduce((total, item) => {
-    return total + item.quantity;
-  }, 0);
-
-  cartCount.textContent = totalItems;
-}
-
 function renderCart() {
   let cart = getCart();
 
